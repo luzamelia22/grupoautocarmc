@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GrupoMCAutocars</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Encabezado y navegación principal -->
+    <header>
+        <img src="logo.pe.jpeg" alt="logo de Luz Amelia Mamani Condori" id="logo">
+        <h1>          </h1>
+        <p>Bienvenid@s</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#presentacion">Presentación</a></li>
+            <li><a href="#nosotros">Nosotros</a></li>
+            <li><a href="#servicios">Servicios de Taller</a></li>
+            <li><a href="#productos">Productos</a></li>
+            <li><a href="#sucursales">Sucursales</a></li>
+            <li><a href="#tienda">Tienda</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <!-- Sección de Inicio -->
+    <section id="inicio">
+        <h2>Inicio</h2>
+        <p>Bienvenidos a mi sitio personal, donde comparto información sobre los servicios de mi taller automotriz, productos, y más.</p>
+    </section>
+
+    <!-- Sección de Presentación -->
+    <section id="presentacion">
+        <h2>Presentación</h2>
+        <p>Soy Luz Amelia Mamani Condori, una profesional en administración de negocios con experiencia en emprendimientos enfocados en servicios automotrices y soluciones innovadoras para mis clientes.</p>
+    </section>
+
+    <!-- Sección de Nosotros -->
+    <section id="nosotros">
+        <h2>Nosotros</h2>
+        <p>En nuestro taller, ofrecemos un servicio de calidad respaldado por años de experiencia y un equipo de profesionales dedicados.</p>
+    </section>
+
+    <!-- Sección de Servicios de Taller -->
+    <section id="servicios">
+        <h2>Servicios de Taller</h2>
+        <ul>
+            <li>Mantenimiento preventivo y correctivo</li>
+            <li>Diagnóstico computarizado</li>
+            <li>Reparación de motor y transmisión</li>
+            <li>Servicio de frenos y suspensión</li>
+        </ul>
+    </section>
+
+    <!-- Sección de Productos -->
+    <section id="productos">
+        <h2>Productos</h2>
+        <p>Ofrecemos una amplia variedad de repuestos y accesorios de calidad para diferentes marcas y modelos de vehículos.</p>
+    </section>
+
+    <!-- Sección de Sucursales -->
+    <section id="sucursales">
+        <h2>Sucursales</h2>
+        <div class="botones-ubicacion">
+            <!-- Botón Sucursal 1 -->
+            <a href="https://www.google.com/maps/place/Ubicacion+Sucursal+1" target="_blank" class="btn-ubicacion">
+                Sucursal 1
+            </a>
+            
+            <!-- Botón Sucursal 2 -->
+            <a href="https://www.google.com/maps/place/Ubicacion+Sucursal+2" target="_blank" class="btn-ubicacion">
+                Sucursal 2
+            </a>
+            
+            <!-- Botón Sucursal 3 -->
+            <a href="https://www.google.com/maps/place/Ubicacion+Sucursal+3" target="_blank" class="btn-ubicacion">
+                Sucursal 3
+            </a>
+        </div>
+    </section>
+
+    <!-- Sección de Tienda -->
+    <section id="tienda">
+        <h2>Tienda</h2>
+        <div class="productos">
+            <!-- Producto 1 -->
+            <div class="producto">
+                <h3>Producto 1</h3>
+                <p>Descripción del producto 1</p>
+                <span>$10.00</span>
+                <button onclick="añadirAlCarrito('Producto 1', 10)">Añadir al carrito</button>
+            </div>
+    
+            <!-- Producto 2 -->
+            <div class="producto">
+                <h3>Producto 2</h3>
+                <p>Descripción del producto 2</p>
+                <span>$15.00</span>
+                <button onclick="añadirAlCarrito('Producto 2', 15)">Añadir al carrito</button>
+            </div>
+            
+            <!-- Agregar más productos de manera similar -->
+        </div>
+        <body>
+            <!-- Todo el contenido de la página aquí -->
+        
+            <!-- JavaScript para funcionalidad del carrito -->
+            <script>
+                // Array para almacenar los productos en el carrito
+                let carrito = [];
+        
+                // Función para añadir un producto al carrito
+                function añadirAlCarrito(nombreProducto, precioProducto) {
+                    // Añade el producto al carrito
+                    carrito.push({ nombre: nombreProducto, precio: precioProducto });
+                    mostrarCarrito();
+                }
+        
+                // Función para mostrar el contenido del carrito
+                function mostrarCarrito() {
+                    const carritoDiv = document.getElementById("carrito");
+                    carritoDiv.innerHTML = ""; // Limpiar el contenido actual
+        
+                    if (carrito.length === 0) {
+                        carritoDiv.innerHTML = "<p>Tu carrito está vacío</p>";
+                    } else {
+                        let total = 0;
+                        
+                        // Mostrar cada producto en el carrito
+                        carrito.forEach((item, index) => {
+                            const itemDiv = document.createElement("div");
+                            itemDiv.classList.add("item-carrito");
+                            itemDiv.innerHTML = `
+                                <span>${item.nombre}</span>
+                                <span>$${item.precio.toFixed(2)}</span>
+                                <button onclick="eliminarDelCarrito(${index})">Eliminar</button>
+                            `;
+                            carritoDiv.appendChild(itemDiv);
+                            total += item.precio;
+                        });
+        
+                        // Mostrar el total
+                        const totalDiv = document.createElement("div");
+                        totalDiv.classList.add("item-carrito");
+                        totalDiv.innerHTML = `<strong>Total:</strong> <strong>$${total.toFixed(2)}</strong>`;
+                        carritoDiv.appendChild(totalDiv);
+                    }
+                }
+        
+                // Función para eliminar un producto del carrito
+                function eliminarDelCarrito(index) {
+                    carrito.splice(index, 1); // Elimina el producto del array
+                    mostrarCarrito();
+                }
+            </script>
+        </body>
+        <!-- Carrito de compras -->
+        <h2>Carrito de Compras</h2>
+        <div id="carrito">
+            <p>Tu carrito está vacío</p>
+        </div>
+
+        <p>Explora nuestra tienda en línea y encuentra los repuestos y accesorios que necesitas para tu vehículo.</p>
+        <a href="tienda.html">Visita la Tienda</a>
+        
+    </section>
+
+    <!-- Sección de Contacto -->
+    <section id="contacto">
+        <section id="contacto">
+            <h2>Contáctame</h2>
+            <form action="/enviar" method="post">
+                <!-- Campo de Nombre -->
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+        
+                <!-- Campo de Correo Electrónico -->
+                <label for="email">Correo Electrónico:</label>
+                <input type="email" id="email" name="email" required>
+        
+                <!-- Campo de Celular -->
+                <label for="Celular">Celular:</label>
+                <input type="cel" id="Celular" name="Celular">
+        
+                <!-- Campo de Comentario -->
+                <label for="Comentario">Comentario:</label>
+                <textarea id="Comentario" name="Comentario" rows="5" required></textarea>
+        
+                <!-- Botón de Enviar -->
+                <button type="submit">Enviar</button>
+            </form>
+    </section>
+        <h2>Contacto</h2>
+        <p>Para más información, contáctame:</p>
+        <p>Celular: 973350029</p>
+        <p>Email: GrupoMCAutocars@gmail.com.pe</p>
+    </section>
+
+    <footer>
+        <p>&copy; GrupoMCAutocars 2024 </p>
+    </footer>
+</body>
+</html>
